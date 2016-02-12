@@ -1,0 +1,61 @@
+\documentclass{article}
+\begin{document}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+Timesheet CERMEL&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Name of staff menmber&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Name of supervisor&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Project title&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Type of contract&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Year&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Calender month&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\\
+\hline
+Programme&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Project A&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Project B&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Project C&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Total&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\\
+\hline
+Weekends&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Annual leave&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Public holidays&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Illness&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Other absence&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+Total&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\\
+\hline
+Total productive hours&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\\
+\hline
+Total hours&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\\
+\\
+\hline
+Signature of staff members:&_&_&_&_&_&_&_&_&_&Signature  of supervisor/DFA:&_&_&_&_&_&_&_&_&_&_&_&&-&&&&&&&&&\\
+\hline
+Date&&&&&&&&&&Date&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\end{tabular}
+\end{document}
