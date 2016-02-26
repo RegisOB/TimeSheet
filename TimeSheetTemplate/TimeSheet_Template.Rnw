@@ -1,4 +1,5 @@
-\documentclass[landscape]{article}
+%\documentclass[landscape]{article}
+\documentclass[a4paper,12pt,oneside, landscape]{article}
 %\documentclass{article}
 %%%Loading the packages
 \usepackage{pdflscape}
@@ -36,25 +37,25 @@ source('R/TimeSheet.R')
 \end{tabular}
 \end{center}
 
-%%Print Program table
-%%%%%%%%%%%%%%%%%%%%%
-<<tab1,results='asis',echo=FALSE>>=
+
+
+<<tab5,results='asis',echo=FALSE>>=
 library(xtable)
-tab1 <- xtable((TableProgram.2), digits=0)
-#align(tab1) <- as.character(|l|*{(ncol(TableProgram.2)-1)}{c|})
-print(tab1, latex.environments = "center")
+tab1 <- rbind(TableProgram.2, TableEmpty1)
+tab2 <- rbind(tab1, TableAbsence.2)
+tab3 <- rbind(tab2, TableEmpty1)
+tab4 <- rbind(tab3, TotProd_Hr)
+tab5 <- rbind(tab4, TableEmpty1)
+tab6 <- rbind(tab5, Tot_Hrs.2)
+tab61 <- xtable((tab6), digits=0)
+print(tab61, latex.environments = "center")
 @
 
-<<tab2,results='asis',echo=FALSE>>=
-tab2 <- xtable((TableAbsence.2), digits=0)
-#align(tab1) <- as.character(|l|*{(ncol(TableProgram.2)-1)}{c|})
-print(tab2, latex.environments = "center", include.colnames = FALSE, hline.after = c(0,nrow(tab2)))
-@
-
-\textbf{Signature of staff members:}\hspace*{7cm}\textbf{Date:}\\\\
+%\vspace*{0.2cm}
+\textbf{Signature of staff members:}\hspace*{6.25cm}\textbf{Date:}\\\\
 \textbf{Signature of supervisor or DFA:}\hspace*{6.25cm}\textbf{Date:}
-%\end{sideways}
-%\end{landscape}
+
+%%Total productive hours
 
 
 
