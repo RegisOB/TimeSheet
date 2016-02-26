@@ -41,10 +41,16 @@ SumCol <- as.data.frame(apply(TableProgram, 1, sum))
 names(SumCol) <- 'Total'
 TableProgram.1 <- cbind(TableProgram, SumCol)
 
-##Added column called total
+##Added row called total
 SumRow <- as.data.frame(apply(TableProgram.1, 2, sum))
 names(SumRow) <- 'Total'
 TableProgram.2 <- rbind(TableProgram.1, t(SumRow))
+
+##Added row empty
+TableEmpty1 <- matrix('', 1, ncol = length(Days)+1)
+TableEmpty1 <- as.data.frame(TableEmpty1)
+colnames(TableEmpty1) <- c(as.character(1:length(Days)), 'Total')
+row.names(TableEmpty1) <- ' '
 
 
 ###Creation table for Week(W), Annual leave (A), Public hollidays (P), Illness (I), Other absence (O)
@@ -69,15 +75,24 @@ SumCol <- as.data.frame(apply(TableAbsence, 1, sum))
 names(SumCol) <- 'Total'
 TableAbsence.1 <- cbind(TableAbsence, SumCol)
 
-##Added column called total
+##Added row called total
 SumRow <- as.data.frame(apply(TableAbsence.1, 2, sum))
 names(SumRow) <- 'Total'
 TableAbsence.2 <- rbind(TableAbsence.1, t(SumRow))
 
+##Total productive hours
+TotProd_Hr <- TableProgram.2['Total', ]
+row.names(TotProd_Hr) <- 'Total productive hours'
 
+##Total hours
+#Total absence
+Tot_Abs <- TableAbsence.2['Total', ]
+Tot_Hrs <- rbind(TotProd_Hr, Tot_Abs)
 
-
-
+SumRow <- as.data.frame(apply(Tot_Hrs, 2, sum))
+names(SumRow) <- 'Total hours'
+Tot_Hrs.1 <- rbind(Tot_Hrs, t(SumRow))
+Tot_Hrs.2 <- Tot_Hrs.1['Total hours', ]
 
 
 
