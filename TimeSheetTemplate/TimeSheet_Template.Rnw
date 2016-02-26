@@ -1,0 +1,136 @@
+\documentclass[landscape]{article}
+%\documentclass{article}
+%%%Loading the packages
+\usepackage{pdflscape}
+%\usepackage{rotating}
+
+%%Starting the document
+\begin{document}
+
+%%%Loading TimeSheet R script%%%%%%%%%%%%
+<<init, echo=F>>=
+setwd('E:/backup/Research Activities/CERMEL/Research team/Dr Bertrand/Timesheet')
+source('R/TimeSheet.R')
+#getwd()
+@
+
+
+
+%%%Defining the table for time sheet%%%%%%%
+%\rotatebox{90}{
+
+% %\begin{sideways}
+% \begin{center}
+% \begin{tabular}{|l|*{32}{c|}}
+%  \hline
+% \multicolumn{33}{|c|}{\textbf{\Large{Timesheet CERMEL}}}\\
+% \hline
+% \textbf{Name of staff menmber}&\multicolumn{32}{l|}{\Sexpr{NameStaff[1]}}\\
+% \hline
+% \textbf{Name of supervisor}&\multicolumn{32}{c|}{}\\
+% \hline
+% \textbf{Project title}&\multicolumn{32}{c|}{}\\
+% \hline
+% \textbf{Type of contract}&\multicolumn{32}{c|}{}\\
+% \hline
+% \textbf{Year}&\multicolumn{32}{c|}{}\\
+% \hline
+% \textbf{Calender month}&\multicolumn{32}{c|}{}\\
+% \hline
+% \multicolumn{33}{c}{}\\
+% \hline
+% \textbf{Programme}&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&
+% 19&20&21&22&23&24&25&26&27&28&29&30&31&Total\\
+% \hline
+% Project A&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% Project B&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% Project C&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% \textbf{Total}&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% \multicolumn{33}{c}{}\\
+% \hline
+% Weekends&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% Annual leave&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% Public holidays&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% Illness&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% Other absence&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% \textbf{Total}&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% \multicolumn{33}{c}{}\\
+% \hline
+% \textbf{Total productive hours}&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+%  \hline
+% \multicolumn{33}{c}{}\\
+%  \hline
+% \textbf{Total hours}&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+% \hline
+% \end{tabular}
+% \end{center}
+%\end{sidewaystable}
+%}
+%\begin{sideways}
+
+%%Personal Information
+\begin{center}
+\begin{tabular}{|l|*{19}{c|}}
+ \hline
+\multicolumn{20}{|c|}{\textbf{\Large{Timesheet CERMEL}}}\\
+\hline
+\textbf{Name of staff menmber}&\multicolumn{19}{l|}{\Sexpr{NameStaff[1]}}\\
+\hline
+\textbf{Name of supervisor}&\multicolumn{19}{c|}{}\\
+\hline
+\textbf{Project title}&\multicolumn{19}{c|}{}\\
+\hline
+\textbf{Type of contract}&\multicolumn{19}{c|}{}\\
+\hline
+\textbf{Year}&\multicolumn{19}{c|}{}\\
+\hline
+\textbf{Calender month}&\multicolumn{19}{c|}{}\\
+\hline
+\end{tabular}
+\end{center}
+
+%%Print Program table
+%%%%%%%%%%%%%%%%%%%%%
+<<tab1,results='asis',echo=FALSE>>=
+library(xtable)
+tab1 <- xtable((TableProgram.2), digits=0)
+#align(tab1) <- as.character(|l|*{(ncol(TableProgram.2)-1)}{c|})
+print(tab1, latex.environments = "center")
+@
+
+<<tab2,results='asis',echo=FALSE>>=
+tab2 <- xtable((TableAbsence.2), digits=0)
+#align(tab1) <- as.character(|l|*{(ncol(TableProgram.2)-1)}{c|})
+print(tab2, latex.environments = "center", include.colnames = FALSE, hline.after = c(0,nrow(tab2)))
+@
+
+\textbf{Signature of staff members:}\hspace*{7cm}\textbf{Date:}\\\\
+\textbf{Signature of supervisor or DFA:}\hspace*{6.25cm}\textbf{Date:}
+%\end{sideways}
+%\end{landscape}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
