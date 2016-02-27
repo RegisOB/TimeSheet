@@ -1,20 +1,15 @@
 %\documentclass[landscape]{article}
-\documentclass[a4paper,12pt,oneside, landscape]{article}
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc} 
+%\usepackage[francais]{babel}
+\usepackage{shadow, fancybox}
 %\documentclass{article}
 %%%Loading the packages
-\usepackage{pdflscape}
+%\usepackage{pdflscape}
 %\usepackage{rotating}
 
 %%Starting the document
 \begin{document}
-
-%%%Loading TimeSheet R script%%%%%%%%%%%%
-<<init, echo=F>>=
-setwd('E:/backup/Research Activities/CERMEL/Research team/Dr Bertrand/Timesheet')
-source('R/TimeSheet.R')
-#getwd()
-@
-
 
 %%Personal Information
 \begin{center}
@@ -22,17 +17,17 @@ source('R/TimeSheet.R')
  \hline
 \multicolumn{20}{|c|}{\textbf{\Large{Timesheet CERMEL}}}\\
 \hline
-\textbf{Name of staff menmber}&\multicolumn{19}{l|}{\Sexpr{NameStaff[1]}}\\
+\textbf{Name of staff menmber}&\multicolumn{19}{l|}{\Sexpr{NameStaff[2]}}\\
 \hline
-\textbf{Name of supervisor}&\multicolumn{19}{c|}{}\\
+\textbf{Name of supervisor}&\multicolumn{19}{l|}{}\\
 \hline
-\textbf{Project title}&\multicolumn{19}{c|}{}\\
+\textbf{Project title}&\multicolumn{19}{l|}{}\\
 \hline
-\textbf{Type of contract}&\multicolumn{19}{c|}{}\\
+\textbf{Type of contract}&\multicolumn{19}{l|}{}\\
 \hline
-\textbf{Year}&\multicolumn{19}{c|}{}\\
+\textbf{Year}&\multicolumn{19}{l|}{\Sexpr{Year}}\\
 \hline
-\textbf{Calender month}&\multicolumn{19}{c|}{}\\
+\textbf{Calender month}&\multicolumn{19}{l|}{\Sexpr{Month}}\\
 \hline
 \end{tabular}
 \end{center}
@@ -41,14 +36,8 @@ source('R/TimeSheet.R')
 
 <<tab5,results='asis',echo=FALSE>>=
 library(xtable)
-tab1 <- rbind(TableProgram.2, TableEmpty1)
-tab2 <- rbind(tab1, TableAbsence.2)
-tab3 <- rbind(tab2, TableEmpty1)
-tab4 <- rbind(tab3, TotProd_Hr)
-tab5 <- rbind(tab4, TableEmpty1)
-tab6 <- rbind(tab5, Tot_Hrs.2)
-tab61 <- xtable((tab6), digits=0)
-print(tab61, latex.environments = "center")
+tab61 <- xtable((List.timesheet[[2]]), digits=0)
+print(tab61, scalebox=0.6)
 @
 
 %\vspace*{0.2cm}

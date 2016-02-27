@@ -1,5 +1,5 @@
 %\documentclass[landscape]{article}
-\documentclass[a4paper,12pt,oneside, landscape]{article}\usepackage[]{graphicx}\usepackage[]{color}
+\documentclass[a4paper,10pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
 %% maxwidth is the original width if it is less than linewidth
 %% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -49,98 +49,68 @@
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
+\usepackage[utf8]{inputenc} 
+%\usepackage[francais]{babel}
+\usepackage{shadow, fancybox}
 %\documentclass{article}
 %%%Loading the packages
-\usepackage{pdflscape}
+%\usepackage{pdflscape}
 %\usepackage{rotating}
 
 %%Starting the document
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
-%%%Loading TimeSheet R script%%%%%%%%%%%%
-
-
-
 %%Personal Information
-%\begin{center}
+\begin{center}
 \begin{tabular}{|l|*{19}{c|}}
  \hline
 \multicolumn{20}{|c|}{\textbf{\Large{Timesheet CERMEL}}}\\
 \hline
-\textbf{Name of staff menmber}&\multicolumn{19}{l|}{Abraham Sunday ALABI}\\
+\textbf{Name of staff menmber}&\multicolumn{19}{l|}{Matthew Benjamin Bransby MCCALL}\\
 \hline
-\textbf{Name of supervisor}&\multicolumn{19}{c|}{}\\
+\textbf{Name of supervisor}&\multicolumn{19}{l|}{}\\
 \hline
-\textbf{Project title}&\multicolumn{19}{c|}{}\\
+\textbf{Project title}&\multicolumn{19}{l|}{}\\
 \hline
-\textbf{Type of contract}&\multicolumn{19}{c|}{}\\
+\textbf{Type of contract}&\multicolumn{19}{l|}{}\\
 \hline
-\textbf{Year}&\multicolumn{19}{c|}{}\\
+\textbf{Year}&\multicolumn{19}{l|}{2016}\\
 \hline
-\textbf{Calender month}&\multicolumn{19}{c|}{}\\
+\textbf{Calender month}&\multicolumn{19}{l|}{January}\\
 \hline
 \end{tabular}
-%\end{center}
+\end{center}
 
-%' %%Print Program table
-%' %%%%%%%%%%%%%%%%%%%%%
-%' <<tab1,results='asis',echo=FALSE>>=
-%' library(xtable)
-%' tab1 <- xtable((TableProgram.2), digits=0)
-%' #align(tab1) <- as.character(|l|*{(ncol(TableProgram.2)-1)}{c|})
-%' print(tab1, latex.environments = "center")
-%' @
-%' 
-%' %%Print absence table
-%' %%%%%%%%%%%%%%%%%%%%%%
-%' <<tab2,results='asis',echo=FALSE>>=
-%' tab2 <- xtable((TableAbsence.2), digits=0)
-%' #align(tab1) <- as.character(|l|*{(ncol(TableProgram.2)-1)}{c|})
-%' print(tab2, latex.environments = "center", include.colnames = FALSE, hline.after = c(0,nrow(tab2)))
-%' @
-%' 
-%' %%Print total productive hours table
-%' %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%' <<tab3,results='asis',echo=FALSE>>=
-%' tab3 <- xtable((TotProd_Hr), digits=0)
-%' #align(tab1) <- as.character(|l|*{(ncol(TableProgram.2)-1)}{c|})
-%' print(tab3, latex.environments = "center", include.colnames = FALSE, hline.after = c(0,nrow(tab3)))
-%' @
-%' 
-%' %%Print total hours table
-%' %%%%%%%%%%%%%%%%%%%%%%%%%
-%' <<tab4,results='asis',echo=FALSE>>=
-%' tab4 <- xtable((Tot_Hrs.2), digits=0)
-%' #align(tab1) <- as.character(|l|*{(ncol(TableProgram.2)-1)}{c|})
-%' print(tab4, latex.environments = "center", include.colnames = FALSE, hline.after = c(0,nrow(tab3)))
-%' @
+
 
 % latex table generated in R 3.2.3 by xtable 1.8-2 package
-% Fri Feb 26 18:45:51 2016
+% Sat Feb 27 02:14:16 2016
 \begin{table}[ht]
 \centering
+\scalebox{0.6}{
 \begin{tabular}{rllllllllllllllllllllllllllllllll}
   \hline
  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & Total \\ 
   \hline
-Project A & 0 & 0 & 8 & 8 & 8 & 8 & 0 & 8 & 8 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 152 \\ 
+Project A & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 152 \\ 
   Project B & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
   Project C & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
-  Total & 0 & 0 & 8 & 8 & 8 & 8 & 0 & 8 & 8 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 152 \\ 
+  Total & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 152 \\ 
     &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
-  Weekends & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 \\ 
-  Annual leave & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 16 \\ 
-  Public holidays & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
-  Illness & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 48 \\ 
-  Other absence & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 24 \\ 
-  Total1 & 8 & 8 & 0 & 0 & 0 & 0 & 8 & 0 & 0 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 96 \\ 
+  Weekends & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+  Annual leave & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 56 \\ 
+  Public holidays & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 16 \\ 
+  Illness & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+  Other absence & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 24 \\ 
+  Total1 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 96 \\ 
    1 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
-  Total productive hours & 0 & 0 & 8 & 8 & 8 & 8 & 0 & 8 & 8 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 152 \\ 
+  Total productive hours & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 0 & 0 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 152 \\ 
    2 &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ 
   Total hours & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 8 & 248 \\ 
    \hline
 \end{tabular}
+}
 \end{table}
 
 

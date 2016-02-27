@@ -2,7 +2,7 @@
 ##################################
 library(readxl)
 library(stringr)
-TS_data.0 <- read_excel('Data/TS_2016_data.xlsx', sheet = 3)
+TS_data.0 <- read_excel('Data/TS_2016_data.xlsx', sheet = IndexSheet)
 
 #Extraction of name staff
 #########################
