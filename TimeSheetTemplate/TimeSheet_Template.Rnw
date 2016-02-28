@@ -1,50 +1,69 @@
-%\documentclass[landscape]{article}
-\documentclass[a4paper,10pt]{article}
-\usepackage[utf8]{inputenc} 
-%\usepackage[francais]{babel}
-\usepackage{shadow, fancybox}
+\documentclass[11pt,a4paper,landscape]{article}
 %\documentclass{article}
+%\usepackage[utf8]{inputenc} 
+\usepackage[francais]{babel}
+\usepackage{shadow, fancybox}
+\usepackage{geometry}
 %%%Loading the packages
 %\usepackage{pdflscape}
-%\usepackage{rotating}
+\usepackage{rotating}
+
+%%%Geometry de la page
+\geometry{%
+a4paper,
+body={150mm,250mm},
+left=25mm,top=25mm,
+headheight=7mm,headsep=4mm,
+marginparsep=4mm,
+marginparwidth=27mm}
 
 %%Starting the document
 \begin{document}
 
 %%Personal Information
-\begin{center}
 \begin{tabular}{|l|*{19}{c|}}
  \hline
 \multicolumn{20}{|c|}{\textbf{\Large{Timesheet CERMEL}}}\\
 \hline
-\textbf{Name of staff menmber}&\multicolumn{19}{l|}{\Sexpr{NameStaff[2]}}\\
+\textbf{Name of staff menmber}&\multicolumn{19}{l|}{\Sexpr{NameStaff[k]}}\\
 \hline
-\textbf{Name of supervisor}&\multicolumn{19}{l|}{}\\
+\textbf{Name of supervisor}&\multicolumn{19}{l|}{\Sexpr{TS_data.0$Supervisor[k]}}\\
 \hline
-\textbf{Project title}&\multicolumn{19}{l|}{}\\
+\textbf{Project title}&\multicolumn{19}{l|}{\Sexpr{TS_data.0$Project[k]}}\\
 \hline
-\textbf{Type of contract}&\multicolumn{19}{l|}{}\\
+\textbf{Type of contract}&\multicolumn{19}{l|}{\Sexpr{TS_data.0$Contact[k]}}\\
 \hline
 \textbf{Year}&\multicolumn{19}{l|}{\Sexpr{Year}}\\
 \hline
 \textbf{Calender month}&\multicolumn{19}{l|}{\Sexpr{Month}}\\
 \hline
 \end{tabular}
-\end{center}
-
 
 
 <<tab5,results='asis',echo=FALSE>>=
 library(xtable)
-tab61 <- xtable((List.timesheet[[2]]), digits=0)
-print(tab61, scalebox=0.6)
+tab61 <- xtable((List.timesheet[[k]]), digits=0)
+align(tab61) <- xalign(tab61)
+
+bold <- function(x){
+  paste0('{\\textbf{', x,' }}')
+}
+
+print(tab61, scalebox=0.9, sanitize.rownames.function = bold)
 @
 
-%\vspace*{0.2cm}
-\textbf{Signature of staff members:}\hspace*{6.25cm}\textbf{Date:}\\\\
-\textbf{Signature of supervisor or DFA:}\hspace*{6.25cm}\textbf{Date:}
+\vspace*{0.2cm}
 
-%%Total productive hours
+\begin{tabular}{|l|cccccccccccccc|l|ccccccccc|}
+ \hline
+\textbf{Signature of staff members:}&&&&&&&&&&&&&&&\textbf{Date:}&&&&&&&&&\\
+&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\textbf{Signature of supervisor or DFA:}&&&&&&&&&&&&&&&\textbf{Date:}&&&&&&&&&\\
+&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\end{tabular}
+
 
 
 
