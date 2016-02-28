@@ -69,6 +69,17 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   colnames(TableEmpty1) <- c(as.character(1:length(Days)), 'Total')
   row.names(TableEmpty1) <- ' '
   
+  TableEmpty2 <- matrix('', 1, ncol = length(Days)+1)
+  TableEmpty2 <- as.data.frame(TableEmpty2)
+  colnames(TableEmpty2) <- c(as.character(1:length(Days)), 'Total')
+  row.names(TableEmpty2) <- '  '
+  
+  TableEmpty3 <- matrix('', 1, ncol = length(Days)+1)
+  TableEmpty3 <- as.data.frame(TableEmpty3)
+  colnames(TableEmpty3) <- c(as.character(1:length(Days)), 'Total')
+  row.names(TableEmpty3) <- '   '
+  
+  
   
   ###Creation table for Week(W), Annual leave (A), Public hollidays (P), Illness (I), Other absence (O)
   #####################################################################################################
@@ -94,7 +105,7 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   
   ##Added row called total
   SumRow <- as.data.frame(apply(TableAbsence.1, 2, sum))
-  names(SumRow) <- 'Total'
+  names(SumRow) <- 'Total '
   TableAbsence.2 <- rbind(TableAbsence.1, t(SumRow))
   
   ##Total productive hours
@@ -113,8 +124,8 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   
   
   ###Merge all the tables
-  timeshee_table <- rbind.data.frame(TableProgram.2, TableEmpty1, TableAbsence.2, TableEmpty1,
-                                     TotProd_Hr, TableEmpty1, Tot_Hrs.2)
+  timeshee_table <- rbind.data.frame(TableProgram.2, TableEmpty1, TableAbsence.2, TableEmpty2,
+                                     TotProd_Hr, TableEmpty3, Tot_Hrs.2)
   
   List.timesheet[[k]] <- timeshee_table
   
@@ -125,6 +136,35 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   #Generating the template
   #########################
   library(knitr)
+  #library(tools)
+  #library(plotflow)
   setwd('./TimeSheetTemplate')
-  knit2pdf("TimeSheet_Template.Rnw")
+
+ #knit2pdf("TimeSheet_Template.Rnw")
+  
+  ##Generate all TimeSheet_Name.tex
+  for (i in 1:length(unique(NameStaff))){
+    knit2pdf("TimeSheet_Template.Rnw",
+             output=paste('TimeSheet_', NameStaff[i], '.tex', sep=""),quiet = F)
+
+  }
+
+  ##Generate PDFs from the tex files for each employee
+  lapply(unique(NameStaff), function(x)
+    texi2pdf(paste0('TimeSheet_', x, '.tex', sep=""), clean = F, quiet = TRUE))
+
+  ##Copy all pdfs from 'TimeSheetTemplate' to 'TimeSheetPDF'
+  AllPdf <- dir(path=getwd(), pattern = ".pdf$", full.names = T)
+  Allname <- list.files(path=getwd(), pattern = ".pdf$")
+  Folder.dest <- paste(paste(directory, '/TimeSheetPDF', sep=''), Allname, sep = '/')
+  file.copy(from = AllPdf, to = Folder.dest)
+ # 
+ # ##Merge all PDFs into one PDF
+ #  setwd('../')
+ #  plotflow:::mergePDF(
+ #    in.file=paste(file.path("TimeSheetPDF", dir("TimeSheetPDF")), collapse=" "),
+ #    file=paste('TimeSheet_CERMEL_', Sys.Date(), '.pdf', sep = '')
+ #  )
+ #  
+  
 }
