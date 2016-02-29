@@ -137,34 +137,34 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   #########################
   library(knitr)
   #library(tools)
-  #library(plotflow)
+  library(plotflow)
   setwd('./TimeSheetTemplate')
 
  #knit2pdf("TimeSheet_Template.Rnw")
   
   ##Generate all TimeSheet_Name.tex
   for (i in 1:length(unique(NameStaff))){
-    knit2pdf("TimeSheet_Template.Rnw",
-             output=paste('TimeSheet_', NameStaff[i], '.tex', sep=""),quiet = F)
+    knit("TimeSheet_Template.Rnw",
+             output=paste('TimeSheet_', NameStaff[i], '.tex', sep=""))
 
   }
 
   ##Generate PDFs from the tex files for each employee
   lapply(unique(NameStaff), function(x)
-    texi2pdf(paste0('TimeSheet_', x, '.tex', sep=""), clean = F, quiet = TRUE))
+    texi2pdf(paste0('TimeSheet_', x, '.tex', sep=""), clean = T, quiet = TRUE))
 
   ##Copy all pdfs from 'TimeSheetTemplate' to 'TimeSheetPDF'
   AllPdf <- dir(path=getwd(), pattern = ".pdf$", full.names = T)
   Allname <- list.files(path=getwd(), pattern = ".pdf$")
   Folder.dest <- paste(paste(directory, '/TimeSheetPDF', sep=''), Allname, sep = '/')
-  file.copy(from = AllPdf, to = Folder.dest)
- # 
+  file.copy(from = AllPdf, to = Folder.dest, overwrite = T)
+ #  
  # ##Merge all PDFs into one PDF
  #  setwd('../')
  #  plotflow:::mergePDF(
  #    in.file=paste(file.path("TimeSheetPDF", dir("TimeSheetPDF")), collapse=" "),
  #    file=paste('TimeSheet_CERMEL_', Sys.Date(), '.pdf', sep = '')
  #  )
- #  
+
   
 }
