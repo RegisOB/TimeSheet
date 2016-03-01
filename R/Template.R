@@ -45,6 +45,7 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
     
     for (j in 1:dim(TableProgram)[2]) {
       TableProgram[i,j] <- ifelse(TS_data.0[k, ColumnDays[j]]=='8', 8, 0)*TS_data.0[k, ColumnProject[i]]/100
+      #TableProgram[i,j] <- ifelse(TS_data.0[k, ColumnDays[j]]=='8', 8, 0)
       colnames(TableProgram) <- as.character(1:length(Days))
     }
   }
@@ -136,35 +137,29 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   #Generating the template
   #########################
   library(knitr)
-  #library(tools)
-  library(plotflow)
   setwd('./TimeSheetTemplate')
-
- #knit2pdf("TimeSheet_Template.Rnw")
   
-  ##Generate all TimeSheet_Name.tex
+  ##Generate all TimeSheet_Name.rnw
   for (i in 1:length(unique(NameStaff))){
-    knit("TimeSheet_Template.Rnw",
-             output=paste('TimeSheet_', NameStaff[i], '.tex', sep=""))
+    knit("Child_Template.Rnw",
+             output=paste('TimeSheet_', NameStaff[i], '.Rnw', sep=""))}
 
-  }
-
-  ##Generate PDFs from the tex files for each employee
-  lapply(unique(NameStaff), function(x)
-    texi2pdf(paste0('TimeSheet_', x, '.tex', sep=""), clean = T, quiet = TRUE))
-
-  ##Copy all pdfs from 'TimeSheetTemplate' to 'TimeSheetPDF'
-  AllPdf <- dir(path=getwd(), pattern = ".pdf$", full.names = T)
-  Allname <- list.files(path=getwd(), pattern = ".pdf$")
-  Folder.dest <- paste(paste(directory, '/TimeSheetPDF', sep=''), Allname, sep = '/')
-  file.copy(from = AllPdf, to = Folder.dest, overwrite = T)
- #  
- # ##Merge all PDFs into one PDF
- #  setwd('../')
- #  plotflow:::mergePDF(
- #    in.file=paste(file.path("TimeSheetPDF", dir("TimeSheetPDF")), collapse=" "),
- #    file=paste('TimeSheet_CERMEL_', Sys.Date(), '.pdf', sep = '')
- #  )
-
+  #Generate the final time sheet template all emplyees in one pdf
+  knit2pdf('Main_Template.Rnw')
   
-}
+  #Rename file template
+  # if (file.exists(paste('TIMESHEET_CERMEL_', Sys.Date(), '.pdf', sep = ''))){
+  #   file.remove(paste('TIMESHEET_CERMEL_', Sys.Date(), '.pdf', sep = ''))
+  # }
+  # 
+  file.rename('Main_Template.pdf', paste('TIMESHEET_CERMEL_', Sys.Date(), '.pdf', sep = ''))
+  
+  #Remove all TimeSheet_Name.rnw
+  AllTimeSheet <- list.files(path=getwd(), pattern = "^TimeSheet")
+  file.remove(AllTimeSheet)
+  
+  #Remove others files
+  OtherFile <- list.files(path=getwd(), pattern = ".tex$|.log$|txt$|.aux$")
+  file.remove(OtherFile)
+  
+  }
