@@ -1,0 +1,45 @@
+%%Personal Information
+\begin{tabular}{|l|*{19}{c|}}
+ \hline
+\multicolumn{20}{|c|}{\textbf{\Large{Timesheet CERMEL}}}\\
+\hline
+\textbf{Name of staff menmber}&\multicolumn{19}{l|}{\Sexpr{NameStaff[i]}}\\
+\hline
+\textbf{Name of supervisor}&\multicolumn{19}{l|}{\Sexpr{TS_data.0$Supervisor[i]}}\\
+\hline
+\textbf{Project title}&\multicolumn{19}{l|}{\Sexpr{TS_data.0$Project[i]}}\\
+\hline
+\textbf{Type of contract}&\multicolumn{19}{l|}{\Sexpr{TS_data.0$Contact[i]}}\\
+\hline
+\textbf{Year}&\multicolumn{19}{l|}{\Sexpr{Year}}\\
+\hline
+\textbf{Calender month}&\multicolumn{19}{l|}{\Sexpr{Month}}\\
+\hline
+\end{tabular}
+
+
+<<results='asis',echo=FALSE>>=
+library(xtable)
+tab61 <- xtable((List.timesheet[[i]]), digits=0)
+align(tab61) <- xalign(tab61)
+
+bold <- function(x){
+  paste0('{\\textbf{', x,' }}')
+}
+
+print(tab61, scalebox=0.9, sanitize.rownames.function = bold)
+@
+
+\vspace*{0.2cm}
+
+\begin{tabular}{|l|cccccccccccccc|l|ccccccccc|}
+ \hline
+\textbf{Signature of staff members:}&&&&&&&&&&&&&&&\textbf{Date:}&&&&&&&&&\\
+&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\textbf{Signature of supervisor or DFA:}&&&&&&&&&&&&&&&\textbf{Date:}&&&&&&&&&\\
+&&&&&&&&&&&&&&&&&&&&&&&&\\
+\hline
+\end{tabular}
+
+\clearpage
