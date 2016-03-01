@@ -1,0 +1,44 @@
+\documentclass[11pt,a4paper,landscape]{article}
+%\documentclass{article}
+%\usepackage[utf8]{inputenc} 
+\usepackage[francais]{babel}
+\usepackage{shadow, fancybox}
+\usepackage{geometry}
+%%%Loading the packages
+%\usepackage{pdflscape}
+\usepackage{rotating}
+
+%%%Geometry de la page
+\geometry{%
+a4paper,
+body={150mm,250mm},
+left=25mm,top=25mm,
+headheight=7mm,headsep=4mm,
+marginparsep=4mm,
+marginparwidth=27mm}
+
+%%Starting the document
+\begin{document}
+
+<<echo=FALSE, include=FALSE>>=
+library(knitr)
+AllTimeSheet <- list.files(path=getwd(), pattern = "^TimeSheet")
+out = NULL
+for (i in 1:length(AllTimeSheet)) {
+out <- c(out, knit_child(AllTimeSheet[i]))
+}
+@
+
+<<echo=FALSE, results="asis">>=
+cat(paste(out, collapse = '\n'))
+@
+
+
+
+
+
+
+
+
+
+\end{document}
