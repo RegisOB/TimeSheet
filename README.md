@@ -1,6 +1,3 @@
----
-output: html_document
----
 # TimeSheet
 Generate a time sheet template for all employees in pdf
 

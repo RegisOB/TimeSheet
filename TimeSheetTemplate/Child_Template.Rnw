@@ -3,7 +3,7 @@
  \hline
 \multicolumn{20}{|c|}{\textbf{\Large{Timesheet CERMEL}}}\\
 \hline
-\textbf{Name of staff menmber}&\multicolumn{19}{l|}{\Sexpr{NameStaff[i]}}\\
+\textbf{Name of staff member}&\multicolumn{19}{l|}{\Sexpr{NameStaff[i]}}\\
 \hline
 \textbf{Name of supervisor}&\multicolumn{19}{l|}{\Sexpr{TS_data.0$Supervisor[i]}}\\
 \hline
@@ -13,10 +13,10 @@
 \hline
 \textbf{Year}&\multicolumn{19}{l|}{\Sexpr{Year}}\\
 \hline
-\textbf{Calender month}&\multicolumn{19}{l|}{\Sexpr{Month}}\\
+\textbf{Calender month}&\multicolumn{19}{l|}{\Sexpr{month.name[Month]}}\\
 \hline
 \end{tabular}
-
+\\\\
 
 <<results='asis',echo=FALSE>>=
 library(xtable)
@@ -30,11 +30,11 @@ bold <- function(x){
 print(tab61, scalebox=0.9, sanitize.rownames.function = bold)
 @
 
-\vspace*{0.2cm}
+\vspace*{1cm}
 
 \begin{tabular}{|l|cccccccccccccc|l|ccccccccc|}
  \hline
-\textbf{Signature of staff members:}&&&&&&&&&&&&&&&\textbf{Date:}&&&&&&&&&\\
+\textbf{Signature of staff member:}&&&&&&&&&&&&&&&\textbf{Date:}&&&&&&&&&\\
 &&&&&&&&&&&&&&&&&&&&&&&&\\
 \hline
 \textbf{Signature of supervisor or DFA:}&&&&&&&&&&&&&&&\textbf{Date:}&&&&&&&&&\\

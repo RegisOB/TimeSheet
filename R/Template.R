@@ -1,7 +1,7 @@
 ###Reading R function to generate automatically the timesheet for all employees
 ###############################################################################
 
-Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
+TimeSheet <- function(Year=2016, Month=1, IndexSheet=3){
   
   #Defining interactivly the directory of main folder
   ###################################################
@@ -13,8 +13,21 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   ##################################
   library(readxl)
   library(stringr)
+  library(chron)
   TS_data.0 <- read_excel('Data/TS_2016_data.xlsx', sheet = IndexSheet)
+  NameSup <-  read_excel('Data/TS_2016_data.xlsx', sheet = 2)
   
+  ##Fill name of supervisor
+  TS_data.0$Supervisor <- NA
+  for (i in 1:nrow(TS_data.0)){
+    for (j in 1:nrow(NameSup)){
+      if (TS_data.0$Project[i]==NameSup$Project[j]){
+        TS_data.0$Supervisor[i] <- NameSup$`Project supervisor`[j]
+      }
+    }
+  }
+  
+ 
   #Extraction of name staff
   #########################
   NameStaff <- paste(TS_data.0$`Staff Given Name`, TS_data.0$`Staff Family Name`, sep = ' ')
@@ -28,6 +41,19 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   #########################
   ProjetAll <- na.omit(str_extract(names(TS_data.0), "^[P|p]roject."))
   ColumnProject <- which(!is.na(str_extract(names(TS_data.0), "^[P|p]roject.")))
+  
+  ##Management of dates
+  date0 <- as.POSIXlt(paste(Year, Month, 1, sep = '-'), tz = "UTC")
+  date1 <- as.POSIXlt(paste(Year, Month, length(Days), sep = '-'), tz = "UTC")
+  MonthDay <- seq.POSIXt(date0, date1, 'day')
+  list.week <- which(is.weekend(MonthDay))
+  
+  dataPubday <- read_excel('Data/TS_2016_data.xlsx', sheet = 1)
+  list.pubday <- which(is.holiday(dates(as.character(MonthDay), format= 'y-m-d'), 
+                                  dates(as.character(dataPubday$Date),format= 'y-m-d')))
+  
+  list.final <- union(list.week, list.pubday)
+  
   
   ##For all employees
   ###################
@@ -43,7 +69,7 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   ##For one employee
   for (i in 1:dim(TableProgram)[1]){
     
-    for (j in 1:dim(TableProgram)[2]) {
+    for (j in setdiff(1:dim(TableProgram)[2], list.final)) {
       TableProgram[i,j] <- ifelse(TS_data.0[k, ColumnDays[j]]=='8', 8, 0)*TS_data.0[k, ColumnProject[i]]/100
       #TableProgram[i,j] <- ifelse(TS_data.0[k, ColumnDays[j]]=='8', 8, 0)
       colnames(TableProgram) <- as.character(1:length(Days))
@@ -53,6 +79,7 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   ##Modified names of columns/rows
   colnames(TableProgram) <- as.character(1:length(Days))
   row.names(TableProgram) <- names(TS_data.0)[ColumnProject]
+  row.names(TableProgram)[1] <- TS_data.0$Project[k]
   
   ##Added column called total
   SumCol <- as.data.frame(apply(TableProgram, 1, sum))
@@ -88,16 +115,30 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   TableAbsence <- as.data.frame(TableAbsence)
   
   row.names(TableAbsence) <- c('Weekends', 'Annual leave', 'Public holidays', 'Illness', 'Other absence')
+  #row.names(TableAbsence) <- c('Annual leave', 'Illness', 'Other absence')
+  
   colnames(TableAbsence) <- as.character(1:length(Days))
   
   ##For one employee
   List.absence <- c('W','A','P','I','O')
-  for (i in 1:dim(TableAbsence)[1]){
+  #List.absence <- c('A','I','O')
+  for (i in c(2,4,5)){
     
     for (j in 1:dim(TableAbsence)[2]) {
       TableAbsence[i,j] <- ifelse(TS_data.0[k, ColumnDays[j]]==List.absence[i], 8, 0)
     }
   }
+  
+  ##Fill the weekend and public days
+  for (j in list.week) {
+    TableAbsence[1,j] <- ifelse(TS_data.0[k, ColumnDays[j]]=='8', 8, 0)
+  }
+  
+  for (j in list.pubday) {
+    TableAbsence[3,j] <- ifelse(TS_data.0[k, ColumnDays[j]]=='8', 8, 0)
+  }
+
+  
   
   ##Added column called total
   SumCol <- as.data.frame(apply(TableAbsence, 1, sum))
@@ -148,10 +189,6 @@ Time_Sheet <- function(Year=2016, Month='January', IndexSheet=3){
   knit2pdf('Main_Template.Rnw')
   
   #Rename file template
-  # if (file.exists(paste('TIMESHEET_CERMEL_', Sys.Date(), '.pdf', sep = ''))){
-  #   file.remove(paste('TIMESHEET_CERMEL_', Sys.Date(), '.pdf', sep = ''))
-  # }
-  # 
   file.rename('Main_Template.pdf', paste('TIMESHEET_CERMEL_', Sys.Date(), '.pdf', sep = ''))
   
   #Remove all TimeSheet_Name.rnw
