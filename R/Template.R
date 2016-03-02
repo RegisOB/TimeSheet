@@ -183,7 +183,7 @@ TimeSheet <- function(Year=2016, Month=1, IndexSheet=3){
   ##Generate all TimeSheet_Name.rnw
   for (i in 1:length(unique(NameStaff))){
     knit("Child_Template.Rnw",
-             output=paste('TimeSheet_', NameStaff[i], '.Rnw', sep=""))}
+             output=paste('TimeSheet_', unique(NameStaff)[i], '.Rnw', sep=""))}
 
   #Generate the final time sheet template all emplyees in one pdf
   knit2pdf('Main_Template.Rnw')
