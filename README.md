@@ -7,21 +7,22 @@ TimeSheet is a R function which generate monthly or annual a time sheet template
 - Month
 - IndexSheet (index of excel sheet of data set related to month)
 
-#Installation and configuration
+#Installation softwares and packages
 You have need to install:
-- Latex and R softwares
+- Latex, R and Rstudio softwares
 - Packages as knitr, readxl, stringr for R 
-- Packages as babel, fancybox, geometry and rotating. 
+- Packages as babel, fancybox, geometry and rotating for Latex
 
-#Generation the time sheet final in pdf
+#Confugiration the main folder
 You have need download all the repository called 'TimeSheet':
-- Click on <<Download ZIP>> or run 'https://github.com/RegisOB/TimeSheet/archive/master.zip' on your browser
+- Click on 'Download ZIP' or run 'https://github.com/RegisOB/TimeSheet/archive/master.zip' on your browser
 - To dezip the master.zip file in your destop
 - Create a main folder called 'Time Sheet'
    - Create the sub folders (Data, R and TimeSheetTemplate)
    - Add your excel file called 'TS_2016_data.xlsx' into Data folder
-   - Add your R script file called 'Template.R' into R folder
+   - Add R script file called 'Template.R' into R folder which is included in master/R dezipped
+   - Add Child_Template.RNW and Main_Template.RNW into TimeSheeetTemplate folder which is included in master/TimeSheeetTemplate
 
-
+#Generation the time sheet final in pdf
  
 
