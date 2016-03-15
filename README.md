@@ -18,9 +18,9 @@ You have need download all the repository called 'TimeSheet':
 - Click on <<Download ZIP>> or run 'https://github.com/RegisOB/TimeSheet/archive/master.zip' on your browser
 - To dezip the master.zip file in your destop
 - Create a main folder called 'Time Sheet'
-  -- Create the sub folders (Data, R and TimeSheetTemplate)
-  -- Add your excel file called 'TS_2016_data.xlsx' into Data folder
-  -- Add your R script file called 'Template.R' into R folder
+   - Create the sub folders (Data, R and TimeSheetTemplate)
+   - Add your excel file called 'TS_2016_data.xlsx' into Data folder
+   - Add your R script file called 'Template.R' into R folder
 
 
  
