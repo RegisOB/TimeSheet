@@ -32,11 +32,21 @@ TimeSheet <- function(Year=2016, Month=1, IndexSheet=3){
   #########################
   NameStaff <- paste(TS_data.0$`Staff Given Name`, TS_data.0$`Staff Family Name`, sep = ' ')
   
+  #Management the days in columns without remove the columns (29, 30 and 31)
+  #Find all dates without data
+  Tot.NA <- function(x) {sum(is.na(x))}
+  TableDays <- which(apply(TS_data.0, 2, Tot.NA)== length(NameStaff))
+  
+  ##Remove the columns of dates with data
+  TS_data.0 <- TS_data.0[, -TableDays]
+  
   ##Extraction days of month
   ##########################
   Days <- na.omit(str_extract(names(TS_data.0), "[0-9]{1,2}"))
   ColumnDays <- which(!is.na(str_extract(names(TS_data.0), "[0-9]{1,2}")))
   
+
+ 
   ##Extraction all projects
   #########################
   ProjetAll <- na.omit(str_extract(names(TS_data.0), "^[P|p]roject."))
