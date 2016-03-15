@@ -10,7 +10,7 @@ TimeSheet is a R function which generate monthly or annual a time sheet template
 #Installation softwares and packages
 You have need to install:
 - Latex, R and Rstudio softwares
-- Packages as knitr, readxl, stringr for R 
+- Packages as knitr, readxl, stringr and Chron for R 
 - Packages as babel, fancybox, geometry and rotating for Latex
 
 #Confugiration the main folder
